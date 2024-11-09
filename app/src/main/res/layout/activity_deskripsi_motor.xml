@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white"
+    tools:context=".DeskripsiMotorActivity">
+
+    <!-- Toolbar -->
+    <LinearLayout
+        android:id="@+id/Dm_linear_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/Dm_btn_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="120dp"
+            android:paddingRight="110dp"
+            android:text="Deskripsi"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/primaryColor" />
+    </LinearLayout>
+
+    <!-- ScrollView to make content scrollable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/Dm_linear_1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Gambar Motor -->
+            <ImageView
+                android:id="@+id/Dm_imgv_1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter" />
+
+            <!-- Nama Motor -->
+            <TextView
+                android:id="@+id/Dm_tv_2"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                android:text="Kawasaki Ninja"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_rectangle"
+                android:textColor="@color/black" />
+
+            <!-- Harga Motor -->
+            <TextView
+                android:id="@+id/Dm_tv_3"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:text="Rp. 50.000.000,00"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textColor="@color/secondaryColor"
+                android:background="@drawable/bg_rectangle"/>
+
+            <!-- Spesifikasi Motor -->
+            <TextView
+                android:id="@+id/Dm_tv_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:text="Spesifikasi :"/>
+
+
+            <!-- Tombol Beli -->
+
+            <TextView
+                android:id="@+id/Dm_tv_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_rectangle"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textAlignment="center"/>
+
+            <Button
+                android:id="@+id/btn_beli"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="Beli"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:background="@drawable/custom_button"
+                android:layout_marginHorizontal="70dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

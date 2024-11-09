@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckoutActivity">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/C_txt_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Checkout Pembelian"
+        android:textSize="20sp"
+        android:textColor="@color/primaryColor"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <!-- Motorcycle Image -->
+    <ImageView
+        android:id="@+id/C_img_1"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:src="@drawable/motor1"
+        android:layout_below="@id/C_txt_1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <!-- Motorcycle Details -->
+    <TextView
+        android:id="@+id/C_txt_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kawasaki Ninja , Tahun 2019, Warna Merah"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:layout_below="@id/C_img_1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Price -->
+    <TextView
+        android:id="@+id/C_txt_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Harga: Rp 40.000.000"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@id/C_txt_2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+<!--    <Button-->
+<!--        android:id="@+id/C_btn_chat"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:background="@drawable/bg_btn_chat"-->
+<!--        android:text="Hubungi Penjual"-->
+<!--        android:textColor="@color/primaryColor"-->
+<!--        android:layout_below="@id/C_txt_3"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="16dp" />-->
+
+    <!-- User Information Form -->
+    <EditText
+        android:id="@+id/C_txt_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama Lengkap"
+        android:layout_below="@id/C_txt_3"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp" />
+
+    <EditText
+        android:id="@+id/C_txt_alamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Alamat Lengkap"
+        android:layout_below="@id/C_txt_username"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp" />
+
+    <EditText
+        android:id="@+id/C_txt_nomorTelp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nomor Telepon"
+        android:layout_below="@id/C_txt_alamat"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp" />
+
+    <!-- Checkout Button -->
+    <Button
+        android:id="@+id/C_btn_Checkout"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:background="@drawable/custom_button"
+        android:text="Checkout"
+        android:textColor="@color/white"
+        android:layout_below="@id/C_txt_nomorTelp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+    <Button
+        android:id="@+id/C_btn_batal"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:background="@drawable/custom_button"
+        android:backgroundTint="@color/gray"
+        android:text="Batal"
+        android:textColor="@color/white"
+        android:layout_below="@id/C_btn_Checkout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
+
+</RelativeLayout>

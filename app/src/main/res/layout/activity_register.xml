@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".RegisterActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/R_btn_1"
+        />
+
+    <ImageView
+        android:id="@+id/R_img_1"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/gambar1"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/R_btn_1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/R_img_1"
+        android:text="REGISTER"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/primaryColor"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="20dp"
+        android:id="@+id/R_txt_1"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="30dp"
+        android:orientation="vertical"
+        android:layout_below="@id/R_txt_1">
+
+        <EditText
+            android:id="@+id/R_txt_username"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_nama"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="15dp"
+            android:inputType="textPersonName"
+            android:hint="Username"/>
+
+        <EditText
+            android:id="@+id/R_txt_email"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_nama"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="15dp"
+            android:inputType="textPersonName"
+            android:hint="Email"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/R_txt_password"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_nama"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="15dp"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            android:hint="Password"/>
+
+        <EditText
+            android:id="@+id/R_txt_repassword"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_nama"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="15dp"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            android:hint="Re-Password"/>
+
+        <Button
+            android:id="@+id/R_btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/R_txt_repassword"
+            android:width="250dp"
+            android:text="Register"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:background="@drawable/custom_button"
+            android:layout_marginHorizontal="80dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
