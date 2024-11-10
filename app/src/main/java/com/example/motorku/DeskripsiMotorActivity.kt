@@ -36,6 +36,7 @@ class DeskripsiMotorActivity : AppCompatActivity() {
         btnBeli = findViewById(R.id.btn_beli)
 
         // Mendapatkan data dari Intent
+        val motorId = intent.getIntExtra("motor_id", -1)  // Pastikan motor_id diteruskan
         val motorName = intent.getStringExtra("item_name")
         val motorPrice = intent.getStringExtra("item_price")
         val motorImageUrl = intent.getStringExtra("item_image")
@@ -56,9 +57,11 @@ class DeskripsiMotorActivity : AppCompatActivity() {
         // Tombol "Beli" untuk berpindah ke LoginActivity
         btnBeli.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra("motor_id", motorId) // Sertakan motor_id dalam Intent
             intent.putExtra("item_name", motorName)
             intent.putExtra("item_price", motorPrice)
             intent.putExtra("item_image", motorImageUrl)
+
             startActivity(intent)
         }
     }

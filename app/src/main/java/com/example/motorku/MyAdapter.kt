@@ -39,7 +39,7 @@ class MyAdapter(private val context: Context, private val itemList: List<Item>) 
         holder.cardView.setOnClickListener {
             val intent = Intent(context, DeskripsiMotorActivity::class.java)
             // Mengirimkan data item ke DeskripsiMotorActivity
-            intent.putExtra("item_id", item.id)
+            intent.putExtra("motor_id", item.id)  // Menambahkan motor_id
             intent.putExtra("item_name", item.name)
             intent.putExtra("item_price", item.price)
             intent.putExtra("item_image", item.image)

@@ -14,7 +14,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.motorku.api.RetrofitClient
 import com.example.motorku.databinding.ActivityLoginBinding
 import com.example.motorku.respon.LoginRespon
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,23 +60,29 @@ class LoginActivity : AppCompatActivity() {
 
         binding.LTxt3.setOnClickListener {
             // Simpan data motor di SharedPreferences sebelum pindah ke RegisterActivity
-            val motorDataPref = getSharedPreferences("MotorData", Context.MODE_PRIVATE)
-            motorDataPref.edit().apply {
-                putString("item_name", intent.getStringExtra("item_name"))
-                putString("item_price", intent.getStringExtra("item_price"))
-                putString("item_image", intent.getStringExtra("item_image"))
-                apply()
+            val motorId = intent.getIntExtra("motor_id", -1)
+            if (motorId != -1) {
+                val motorDataPref = getSharedPreferences("MotorData", Context.MODE_PRIVATE)
+                motorDataPref.edit().apply {
+                    putInt("motor_id", motorId)  // Simpan motor_id hanya jika nilai valid
+                    putString("item_name", intent.getStringExtra("item_name"))
+                    putString("item_price", intent.getStringExtra("item_price"))
+                    putString("item_image", intent.getStringExtra("item_image"))
+                    apply()
+                }
+            } else {
+                // Tangani jika motor_id tidak ditemukan dalam Intent
+                Log.e("MotorData", "motor_id tidak ditemukan dalam Intent")
             }
+
 
             // Pindah ke halaman Register
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
     }
 
     private fun login(username: String, password: String) {
-
         RetrofitClient.api.login(username, password).enqueue(object : Callback<LoginRespon> {
             override fun onResponse(call: Call<LoginRespon>, response: Response<LoginRespon>) {
                 if (response.isSuccessful) {
@@ -95,6 +100,14 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this@LoginActivity, CheckoutActivity::class.java)
 
                     // Ambil data motor dari Intent dan teruskan ke CheckoutActivity
+                    getIntent().getIntExtra("motor_id", -1).let { motorId ->
+                        if (motorId != -1) {
+                            intent.putExtra("motor_id", motorId)
+                        } else {
+                            // Tangani kasus jika motor_id tidak ditemukan
+                            Toast.makeText(this@LoginActivity, "Motor ID tidak ditemukan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                     intent.putExtra("item_name", getIntent().getStringExtra("item_name"))
                     intent.putExtra("item_price", getIntent().getStringExtra("item_price"))
                     intent.putExtra("item_image", getIntent().getStringExtra("item_image"))

@@ -52,27 +52,39 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
-<!--    <Button-->
-<!--        android:id="@+id/C_btn_chat"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="35dp"-->
-<!--        android:background="@drawable/bg_btn_chat"-->
-<!--        android:text="Hubungi Penjual"-->
-<!--        android:textColor="@color/primaryColor"-->
-<!--        android:layout_below="@id/C_txt_3"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="16dp" />-->
-
     <!-- User Information Form -->
+    <TextView
+        android:id="@+id/C_txt_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Id Motor :"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_below="@id/C_txt_3"
+        android:paddingLeft="43dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Motorcycle ID Input -->
+    <EditText
+        android:id="@+id/C_txt_motorId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Masukkan ID Motor"
+        android:layout_below="@id/C_txt_4"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"/>
+
     <EditText
         android:id="@+id/C_txt_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nama Lengkap"
-        android:layout_below="@id/C_txt_3"
-        android:layout_marginTop="16dp"
+        android:layout_below="@id/C_txt_motorId"
         android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp" />
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:hint="Nama Lengkap" />
 
     <EditText
         android:id="@+id/C_txt_alamat"
@@ -94,6 +106,36 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp" />
 
+    <!-- Upload Transaction Proof -->
+
+    <LinearLayout
+        android:id="@+id/C_layout_uploadBukti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/C_txt_nomorTelp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal">
+
+        <!-- Upload Button -->
+        <Button
+            android:id="@+id/C_btn_uploadBukti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Bukti Transaksi"
+            android:layout_gravity="center_vertical"/>
+
+        <!-- Transaction Proof Image -->
+        <ImageView
+            android:id="@+id/C_img_buktiTransaksi"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center_vertical"/>
+<!--            android:src="@drawable/ic_upload_placeholder" />-->
+    </LinearLayout>
+
+
     <!-- Checkout Button -->
     <Button
         android:id="@+id/C_btn_Checkout"
@@ -102,9 +144,9 @@
         android:background="@drawable/custom_button"
         android:text="Checkout"
         android:textColor="@color/white"
-        android:layout_below="@id/C_txt_nomorTelp"
+        android:layout_below="@id/C_layout_uploadBukti"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="20dp" />
 
     <Button
         android:id="@+id/C_btn_batal"

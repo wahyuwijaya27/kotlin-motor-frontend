@@ -72,6 +72,7 @@ class RegisterActivity : AppCompatActivity() {
             register(username, email, password1, password2)
         }
     }
+
     private fun register(username: String, email: String, password: String, passwordConfirmation: String) {
         RetrofitClient.api.register(username, email, password, passwordConfirmation).enqueue(object :
             Callback<ResponseBody> {
@@ -82,13 +83,23 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.makeText(this@RegisterActivity, "Register berhasil, silahkan login.", Toast.LENGTH_LONG).show()
                     }
 
-                    // Simpan email ke SharedPreferences
-                    val sharedPref = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-                    val editor = sharedPref.edit()
-                    editor.putString("email", email)
-                    editor.apply()
+                    // Ambil data dari SharedPreferences
+                    val motorDataPref = getSharedPreferences("MotorData", Context.MODE_PRIVATE)
+                    val motorId = motorDataPref.getInt("motor_id", -1)
+                    val motorName = motorDataPref.getString("item_name", "")
+                    val motorPrice = motorDataPref.getString("item_price", "")
+                    val motorImageUrl = motorDataPref.getString("item_image", "")
 
-                    startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                    // Siapkan intent untuk kembali ke LoginActivity dengan data motor
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java).apply {
+                        putExtra("motor_id", motorId)
+                        putExtra("item_name", motorName)
+                        putExtra("item_price", motorPrice)
+                        putExtra("item_image", motorImageUrl)
+                    }
+
+                    startActivity(intent)
+                    finish()
                 } else {
                     Log.d("RegisterActivity", "Response not successful")
                     runOnUiThread {
