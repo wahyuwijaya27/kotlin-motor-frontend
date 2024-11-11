@@ -1,5 +1,6 @@
 package com.example.motorku
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.motorku.api.ApiInterface
 import com.example.motorku.api.RetrofitClient
 import com.squareup.picasso.Picasso
@@ -89,10 +91,14 @@ class CheckoutActivity : AppCompatActivity() {
             val nomorTelepon = createPartFromString(nomorTeleponEditText.text.toString())
             val motorId = createPartFromString(motorIdEditText.text.toString())
 
+            val sharedPreferences = applicationContext.getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
+            val token = "Bearer ${sharedPreferences.getString("ACCESS_TOKEN", "")}"
+
+
             val buktiTransaksiPart = imageUri?.let { prepareFilePart("bukti_transaksi", it) }
 
             val apiInterface = RetrofitClient.getClient().create(ApiInterface::class.java)
-            apiInterface.checkout(namaLengkap, alamatLengkap, nomorTelepon, motorId, buktiTransaksiPart)
+            apiInterface.checkout(token,namaLengkap, alamatLengkap, nomorTelepon, motorId, buktiTransaksiPart)
                 .enqueue(object : Callback<ApiResponse> {
                     override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                         if (response.isSuccessful) {

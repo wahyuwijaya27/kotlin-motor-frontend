@@ -1,70 +1,77 @@
 package com.example.motorku
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.motorku.api.ApiInterface
+import com.example.motorku.api.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RiwayatFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var myAdapter: MotorAdapter
+    private lateinit var riwayatAdapter: RiwayatAdapter
     private lateinit var riwayatList: MutableList<ItemRiwayat>
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_riwayat, container, false)
 
         recyclerView = view.findViewById(R.id.recyclerViewRiwayat)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         riwayatList = mutableListOf()
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
-        riwayatList.add(ItemRiwayat("Kawasaki Ninja", "Rp. 50.000.000,00", "13-05-2024", "LUNAS", R.drawable.motor1))
+        loadRiwayatData() // Panggil fungsi untuk memuat data checkout
 
-        // Pass context and riwayatList to the MotorAdapter constructor
-        myAdapter = MotorAdapter(riwayatList)
-        recyclerView.adapter = myAdapter
+        riwayatAdapter = RiwayatAdapter(riwayatList)
+        recyclerView.adapter = riwayatAdapter
 
         return view
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RiwayatFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun loadRiwayatData() {
+        val apiInterface = RetrofitClient.instance.create(ApiInterface::class.java)
+
+        val sharedPreferences = requireContext().getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
+        val token = "Bearer ${sharedPreferences.getString("ACCESS_TOKEN", "")}"
+        // Mengambil daftar checkout
+        val call = apiInterface.getCheckouts(token)
+
+        call.enqueue(object : Callback<List<ItemRiwayat>> {
+            override fun onResponse(call: Call<List<ItemRiwayat>>, response: Response<List<ItemRiwayat>>) {
+                if (response.isSuccessful) {
+                    val checkouts = response.body() ?: emptyList()
+                    riwayatList.clear()
+                    for (checkout in checkouts) {
+                        riwayatList.add(
+                            ItemRiwayat(
+                                checkout.nama,
+                                "Rp. ${checkout.harga}",
+                                checkout.created_at,
+                                checkout.image
+                            )
+                        )
+                    }
+                    riwayatAdapter.notifyDataSetChanged() // Update RecyclerView
+                } else {
+                    // Tangani jika response tidak sukses
+                    Toast.makeText(context, "Gagal memuat riwayat", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            override fun onFailure(call: Call<List<ItemRiwayat>>, t: Throwable) {
+                // Tangani kegagalan
+                Toast.makeText(context, "Koneksi gagal: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

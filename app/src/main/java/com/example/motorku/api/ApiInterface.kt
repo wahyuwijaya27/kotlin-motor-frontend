@@ -3,6 +3,7 @@ package com.example.motorku.api
 import com.example.motorku.ApiResponse
 import com.example.motorku.CheckoutData
 import com.example.motorku.Item
+import com.example.motorku.ItemRiwayat
 import com.example.motorku.respon.LoginRespon
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -56,10 +57,17 @@ interface ApiInterface {
     @Multipart
     @POST("checkout")
     fun checkout(
+        @Header("Authorization") token: String,
         @Part("nama_lengkap") namaLengkap: RequestBody,
         @Part("alamat_lengkap") alamatLengkap: RequestBody,
         @Part("nomor_telepon") nomorTelepon: RequestBody,
         @Part("motor_id") motorId: RequestBody,
         @Part buktiTransaksi: MultipartBody.Part?
     ): Call<ApiResponse>
+
+    @GET("checkouts")
+    fun getCheckouts(
+        @Header("Authorization") token: String
+    ): Call<List<ItemRiwayat>>
+
 }

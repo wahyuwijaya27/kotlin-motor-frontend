@@ -2,6 +2,7 @@ package com.example.motorku
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,8 +65,10 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private fun fetchRecommendedMotors() {
         // Mendapatkan token dari SharedPreferences (misalnya)
-        val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val token = "Bearer ${sharedPreferences.getString("auth_token", "")}"
+        val sharedPreferences = requireContext().getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
+        val token = "Bearer ${sharedPreferences.getString("ACCESS_TOKEN", "")}"
+
+//        Log.e("HomeFragment", "Token: $token")
 
         RetrofitClient.api.getRecommendedMotors(token).enqueue(object : Callback<List<Item>> {
             override fun onResponse(call: Call<List<Item>>, response: Response<List<Item>>) {

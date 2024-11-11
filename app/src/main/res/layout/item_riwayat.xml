@@ -43,11 +43,5 @@
             android:layout_height="wrap_content"
             android:text="13-05-2024" />
 
-        <TextView
-            android:id="@+id/textViewStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LUNAS"
-            android:textColor="@color/red"/>
     </LinearLayout>
 </LinearLayout>
