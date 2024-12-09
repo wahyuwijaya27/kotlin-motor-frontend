@@ -4,6 +4,7 @@ import com.example.motorku.ApiResponse
 import com.example.motorku.CheckoutData
 import com.example.motorku.Item
 import com.example.motorku.ItemRiwayat
+import com.example.motorku.respon.CheckoutResponse
 import com.example.motorku.respon.LoginRespon
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -17,6 +18,7 @@ import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 
 
 interface ApiInterface {
@@ -62,12 +64,29 @@ interface ApiInterface {
         @Part("alamat_lengkap") alamatLengkap: RequestBody,
         @Part("nomor_telepon") nomorTelepon: RequestBody,
         @Part("motor_id") motorId: RequestBody,
-        @Part buktiTransaksi: MultipartBody.Part?
-    ): Call<ApiResponse>
+//        @Part buktiTransaksi: MultipartBody.Part?
+    ): Call<CheckoutResponse>
 
     @GET("checkouts")
     fun getCheckouts(
         @Header("Authorization") token: String
     ): Call<List<ItemRiwayat>>
+
+//    @Multipart
+//    @POST("checkout/upload-bukti")
+//    fun uploadBuktiPembayaran(
+//        @Header("Authorization") token: String,
+//        @Part bukti_transaksi: MultipartBody.Part
+//    ): Call<ApiResponse>
+
+    @Multipart
+    @POST("checkout/upload-bukti/{id}")
+    fun uploadBuktiTransaksi(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int,
+        @Part bukti_transaksi: MultipartBody.Part
+    ): Call<ApiResponse>
+
+
 
 }
