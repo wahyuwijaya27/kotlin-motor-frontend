@@ -136,6 +136,22 @@
 <!--    </LinearLayout>-->
 
     <!-- Checkout Button -->
+    <TextView
+        android:id="@+id/C_txt_tata_cara_pembelian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Petunjuk Pembelian"
+        android:textColor="@color/primaryColor"
+        android:textStyle="bold"
+        android:layout_below="@id/C_txt_nomorTelp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackground" />
+
+
     <Button
         android:id="@+id/C_btn_Checkout"
         android:layout_width="200dp"
@@ -143,7 +159,7 @@
         android:background="@drawable/custom_button"
         android:text="Checkout"
         android:textColor="@color/white"
-        android:layout_below="@id/C_txt_nomorTelp"
+        android:layout_below="@id/C_txt_tata_cara_pembelian"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 

@@ -1,9 +1,9 @@
 package com.example.motorku
 
+
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -20,6 +20,7 @@ import okhttp3.RequestBody.Companion.create
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class CheckoutActivity : AppCompatActivity() {
     private lateinit var btnCheckout: Button
@@ -107,6 +108,13 @@ class CheckoutActivity : AppCompatActivity() {
         btnBatal = findViewById(R.id.C_btn_batal)
         btnBatal.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Tombol untuk Tata Cara Pembelian
+        val tataCaraTextButton = findViewById<TextView>(R.id.C_txt_tata_cara_pembelian)
+        tataCaraTextButton.setOnClickListener {
+            val intent = Intent(this, PetunjukPembelianActivity::class.java)
             startActivity(intent)
         }
     }
