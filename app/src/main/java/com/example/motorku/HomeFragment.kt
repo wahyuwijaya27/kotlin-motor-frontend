@@ -59,7 +59,6 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
         // Memanggil API untuk mendapatkan rekomendasi motor
         fetchRecommendedMotors()
-
         return view
     }
 
@@ -67,8 +66,6 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         // Mendapatkan token dari SharedPreferences (misalnya)
         val sharedPreferences = requireContext().getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
         val token = "Bearer ${sharedPreferences.getString("ACCESS_TOKEN", "")}"
-
-//        Log.e("HomeFragment", "Token: $token")
 
         RetrofitClient.api.getRecommendedMotors(token).enqueue(object : Callback<List<Item>> {
             override fun onResponse(call: Call<List<Item>>, response: Response<List<Item>>) {

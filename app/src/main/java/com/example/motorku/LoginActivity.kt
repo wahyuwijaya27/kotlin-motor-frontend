@@ -75,7 +75,6 @@ class LoginActivity : AppCompatActivity() {
                 Log.e("MotorData", "motor_id tidak ditemukan dalam Intent")
             }
 
-
             // Pindah ke halaman Register
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
