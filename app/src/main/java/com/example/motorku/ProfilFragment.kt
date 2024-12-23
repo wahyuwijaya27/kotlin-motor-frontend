@@ -51,7 +51,13 @@ class ProfilFragment : Fragment() {
             logout()
         }
 
-        loadUserData()
+        val sharedPref = activity?.getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
+        val token = sharedPref?.getString("ACCESS_TOKEN", "") ?: ""
+
+        if (token.isNotEmpty()) {
+            loadUserData()
+        }
+
         return view
     }
 

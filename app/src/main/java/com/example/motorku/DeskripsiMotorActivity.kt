@@ -1,5 +1,6 @@
 package com.example.motorku
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -61,15 +62,30 @@ class DeskripsiMotorActivity : AppCompatActivity() {
             .error(R.drawable.ic_error) // Gambar jika terjadi error
             .into(motorImageView)
 
+        val sharedPreferences = applicationContext.getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString("ACCESS_TOKEN", "")
+
         // Tombol "Beli" untuk berpindah ke LoginActivity
         btnBeli.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+            if (token.isNullOrEmpty()) {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.putExtra("motor_id", motorId) // Sertakan motor_id dalam Intent
+                intent.putExtra("item_name", motorName)
+                intent.putExtra("item_price", motorPrice)
+                intent.putExtra("item_image", motorImageUrl)
+
+                startActivity(intent)
+
+            } else {
+            val intent = Intent(this, CheckoutActivity::class.java)
             intent.putExtra("motor_id", motorId) // Sertakan motor_id dalam Intent
             intent.putExtra("item_name", motorName)
             intent.putExtra("item_price", motorPrice)
             intent.putExtra("item_image", motorImageUrl)
 
             startActivity(intent)
+                }
+
         }
     }
 }

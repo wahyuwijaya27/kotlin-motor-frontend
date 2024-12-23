@@ -70,7 +70,8 @@ class BuktiPembelianActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                     if (response.isSuccessful) {
                         Toast.makeText(this@BuktiPembelianActivity, "Bukti transaksi berhasil diunggah", Toast.LENGTH_SHORT).show()
-                        finish() // Kembali ke halaman sebelumnya
+                        val intent = Intent(this@BuktiPembelianActivity, HomeActivity::class.java)
+                        startActivity(intent)// Kembali ke halaman sebelumnya
                     } else {
                         Toast.makeText(this@BuktiPembelianActivity, "Gagal mengunggah bukti transaksi", Toast.LENGTH_SHORT).show()
                     }
