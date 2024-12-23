@@ -17,6 +17,7 @@ class DeskripsiMotorActivity : AppCompatActivity() {
     private lateinit var motorNameTextView: TextView
     private lateinit var motorPriceTextView: TextView
     private lateinit var motorSpecTextView: TextView
+    private lateinit var back : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,12 @@ class DeskripsiMotorActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        back = findViewById(R.id.Dm_btn_1)
+        back.setOnClickListener {
+            val i = Intent(this, HomeActivity::class.java)
+            startActivity(i)
         }
 
         // Menginisialisasi komponen UI

@@ -36,7 +36,7 @@
                 android:id="@+id/filter_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_filter"
+                android:src="@drawable/ic_cart"
                 android:contentDescription="Filter Icon"
                 android:layout_gravity="center" />
         </LinearLayout>

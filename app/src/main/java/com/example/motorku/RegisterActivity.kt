@@ -19,7 +19,7 @@ import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var back : ImageView
+//    private lateinit var back : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +32,11 @@ class RegisterActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        back = findViewById(R.id.R_btn_1)
-        back.setOnClickListener {
-            val i = Intent(this, LoginActivity::class.java)
-            startActivity(i)
-        }
+//        back = findViewById(R.id.R_btn_1)
+//        back.setOnClickListener {
+//            val i = Intent(this, LoginActivity::class.java)
+//            startActivity(i)
+//        }
 
         binding.RBtnRegister.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)

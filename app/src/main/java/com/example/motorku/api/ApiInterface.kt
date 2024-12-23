@@ -64,20 +64,12 @@ interface ApiInterface {
         @Part("alamat_lengkap") alamatLengkap: RequestBody,
         @Part("nomor_telepon") nomorTelepon: RequestBody,
         @Part("motor_id") motorId: RequestBody,
-//        @Part buktiTransaksi: MultipartBody.Part?
     ): Call<CheckoutResponse>
 
     @GET("checkouts")
     fun getCheckouts(
         @Header("Authorization") token: String
     ): Call<List<ItemRiwayat>>
-
-//    @Multipart
-//    @POST("checkout/upload-bukti")
-//    fun uploadBuktiPembayaran(
-//        @Header("Authorization") token: String,
-//        @Part bukti_transaksi: MultipartBody.Part
-//    ): Call<ApiResponse>
 
     @Multipart
     @POST("checkout/upload-bukti/{id}")
