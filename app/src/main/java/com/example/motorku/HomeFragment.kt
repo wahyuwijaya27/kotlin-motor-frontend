@@ -1,6 +1,7 @@
 package com.example.motorku
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var itemList: MutableList<Item>
     private lateinit var filteredItemList: MutableList<Item>
     private lateinit var searchView: SearchView
+    private lateinit var icCart: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +33,12 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         recyclerView = view.findViewById(R.id.recyclerView)
+        icCart = view.findViewById(R.id.ic_cart)
+
+        icCart.setOnClickListener {
+            val intent = Intent(requireContext(), CartActivity::class.java)
+            startActivity(intent)
+        }
         recyclerView.layoutManager = GridLayoutManager(context, 2)
 
         itemList = mutableListOf()

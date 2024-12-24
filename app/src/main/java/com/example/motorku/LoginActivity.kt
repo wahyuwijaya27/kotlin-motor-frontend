@@ -12,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.motorku.api.ApiInterface
 import com.example.motorku.api.RetrofitClient
 import com.example.motorku.databinding.ActivityLoginBinding
 import com.example.motorku.respon.LoginRespon
@@ -97,23 +98,51 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     Toast.makeText(this@LoginActivity, "Login berhasil", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@LoginActivity, CheckoutActivity::class.java)
 
-                    // Ambil data motor dari Intent dan teruskan ke CheckoutActivity
-                    getIntent().getIntExtra("motor_id", -1).let { motorId ->
-                        if (motorId != -1) {
-                            intent.putExtra("motor_id", motorId)
-                        } else {
-                            // Tangani kasus jika motor_id tidak ditemukan
-                            Toast.makeText(this@LoginActivity, "Motor ID tidak ditemukan", Toast.LENGTH_SHORT).show()
+                    if (getIntent().getStringExtra("type") == "keranjang") {
+                        val apiInterface = RetrofitClient.getClient().create(ApiInterface::class.java)
+                        apiInterface.addToCart("Bearer $token",getIntent().getIntExtra("motor_id", -1)).enqueue(object : Callback<ApiResponse>{
+                            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+                                Toast.makeText(applicationContext, "Motor berhasil ditambahkan ke keranjang", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this@LoginActivity, DeskripsiMotorActivity::class.java)
+                                intent.putExtra("motor_id", getIntent().getIntExtra("motor_id", -1))
+                                intent.putExtra("item_name", getIntent().getStringExtra("item_name"))
+                                intent.putExtra("item_price", getIntent().getStringExtra("item_price"))
+                                intent.putExtra("item_image", getIntent().getStringExtra("item_image"))
+                                intent.putExtra("item_specification", getIntent().getStringExtra("item_specification"))
+
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                                Log.e("AddToCart", "Error: ${t.message}")
+                                Toast.makeText(applicationContext, "Motor gagal ditambahkan ke keranjang", Toast.LENGTH_SHORT).show()
+                            }
+                        })
+
+
+                    } else {
+
+                        val intent = Intent(this@LoginActivity, CheckoutActivity::class.java)
+
+                        // Ambil data motor dari Intent dan teruskan ke CheckoutActivity
+                        getIntent().getIntExtra("motor_id", -1).let { motorId ->
+                            if (motorId != -1) {
+                                intent.putExtra("motor_id", motorId)
+                            } else {
+                                // Tangani kasus jika motor_id tidak ditemukan
+                                Toast.makeText(this@LoginActivity, "Motor ID tidak ditemukan", Toast.LENGTH_SHORT).show()
+                            }
                         }
-                    }
-                    intent.putExtra("item_name", getIntent().getStringExtra("item_name"))
-                    intent.putExtra("item_price", getIntent().getStringExtra("item_price"))
-                    intent.putExtra("item_image", getIntent().getStringExtra("item_image"))
+                        intent.putExtra("item_name", getIntent().getStringExtra("item_name"))
+                        intent.putExtra("item_price", getIntent().getStringExtra("item_price"))
+                        intent.putExtra("item_image", getIntent().getStringExtra("item_image"))
 
-                    startActivity(intent)
-                    finish()
+                        startActivity(intent)
+                        finish()
+                    }
+
                 } else {
                     Toast.makeText(this@LoginActivity, "Login gagal: ${response.message()}", Toast.LENGTH_SHORT).show()
                 }

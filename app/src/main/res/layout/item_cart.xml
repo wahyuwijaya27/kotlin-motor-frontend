@@ -1,0 +1,55 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@android:color/white"
+    android:elevation="2dp">
+
+    <!-- Gambar Motor -->
+    <ImageView
+        android:id="@+id/imgMotor"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_placeholder" />
+
+    <!-- Nama Motor -->
+    <TextView
+        android:id="@+id/tvMotorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/imgMotor"
+        android:layout_marginStart="8dp"
+        android:text="Nama Motor"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:maxLines="1" />
+
+    <!-- Harga Motor -->
+    <TextView
+        android:id="@+id/tvMotorPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMotorName"
+        android:layout_toEndOf="@id/imgMotor"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Rp. 0"
+        android:textSize="14sp"
+        android:textColor="@android:color/holo_green_dark" />
+
+    <!-- Tombol Hapus -->
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:text="Hapus"
+        android:backgroundTint="@color/primaryColor"
+        android:textColor="@android:color/white" />
+</RelativeLayout>

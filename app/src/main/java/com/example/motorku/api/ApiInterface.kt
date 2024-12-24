@@ -6,11 +6,13 @@ import com.example.motorku.Item
 import com.example.motorku.ItemRiwayat
 import com.example.motorku.respon.CheckoutResponse
 import com.example.motorku.respon.LoginRespon
+import com.example.motorku.respon.ResponseItem
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -79,6 +81,22 @@ interface ApiInterface {
         @Part bukti_transaksi: MultipartBody.Part
     ): Call<ApiResponse>
 
+    @FormUrlEncoded
+    @POST("carts")
+    fun addToCart(
+        @Header("Authorization") token: String,
+        @Field("motor_id") motorId: Int,
+    ): Call<ApiResponse>
 
+    @GET("carts")
+    fun getCartItems(
+        @Header("Authorization") token: String
+    ): Call<List<ResponseItem>>
+
+    @DELETE("carts/{id}")
+    fun deleteCartItem(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int
+    ): Call<ApiResponse>
 
 }

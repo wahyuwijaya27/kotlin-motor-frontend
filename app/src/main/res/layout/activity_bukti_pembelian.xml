@@ -25,7 +25,6 @@
         android:layout_marginTop="30dp"
         android:textColor="@color/primaryColor" />
 
-    <!-- ImageView for the uploaded image -->
     <ImageView
         android:id="@+id/Bp_imageView"
         android:layout_width="200dp"
@@ -36,20 +35,27 @@
         android:background="@drawable/image_borde"
         android:scaleType="centerCrop" />
 
-    <!-- LinearLayout for buttons -->
+    <TextView
+        android:id="@+id/tvCountdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Bp_imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="05:00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/primaryColor" />
+
     <LinearLayout
         android:id="@+id/Bp_linear_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/Bp_imageView"
+        android:layout_below="@id/tvCountdown"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="60dp">
-
-        <!-- Button to select image -->
-
-        <!-- Button to capture image -->
 
         <Button
             android:id="@+id/Bp_btn_pilihGambar"
@@ -70,7 +76,6 @@
             android:layout_marginStart="8dp" />
     </LinearLayout>
 
-    <!-- Button to submit the form -->
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="200dp"

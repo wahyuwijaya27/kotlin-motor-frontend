@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Keranjang Saya"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- RecyclerView untuk daftar keranjang -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCart"
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/tvTitle"
+        android:layout_above="@id/btnCheckout"
+        android:layout_marginTop="8dp"
+        tools:listitem="@layout/item_cart"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Tombol Checkout -->
+    <Button
+        android:id="@+id/btnCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Checkout"
+        android:backgroundTint="@color/primaryColor"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

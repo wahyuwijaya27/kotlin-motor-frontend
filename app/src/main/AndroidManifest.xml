@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Motorku"
         tools:targetApi="31">
         <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".PetunjukPembelianActivity"
             android:exported="false" />
         <activity
