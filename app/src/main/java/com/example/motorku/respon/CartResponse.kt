@@ -20,7 +20,10 @@ data class Motor(
 	val brand: String? = null,
 
 	@field:SerializedName("status")
-	val status: String? = null
+	val status: String? = null,
+
+	@field:SerializedName("specification") // Tambahkan ini
+	val specification: String? = null
 )
 
 data class ResponseItem(

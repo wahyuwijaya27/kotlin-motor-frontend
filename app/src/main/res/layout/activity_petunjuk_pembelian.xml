@@ -6,20 +6,12 @@
     tools:context=".BuktiPembelianActivity"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/Bp_btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp" />
-
     <TextView
         android:id="@+id/Pp_txt_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Petunjuk Pembelian"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
@@ -69,14 +61,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp">
 
+                    <!-- Teks Poin 2 -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2. Transfer DP/Uang Muka ke nomor rekening: "
                         android:textSize="16sp" />
 
+                    <!-- Nomor Rekening -->
                     <TextView
                         android:id="@+id/text_nomor_rekening"
                         android:layout_width="wrap_content"
@@ -84,16 +79,20 @@
                         android:text="6805 0103 4082 539"
                         android:textColor="@color/primaryColor"
                         android:textStyle="bold"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                        android:textSize="16sp"
+                        android:layout_marginTop="4dp"
+                        android:layout_gravity="center_horizontal" />
 
-                <Button
-                    android:id="@+id/button_copy_rekening"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Salin Nomor Rekening"
-                    android:textSize="14sp"
-                    android:layout_marginTop="4dp" />
+                    <!-- Tombol Salin -->
+                    <Button
+                        android:id="@+id/button_copy_rekening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Salin"
+                        android:textSize="13sp"
+                        android:layout_marginTop="8dp"
+                        android:layout_gravity="center_horizontal" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
