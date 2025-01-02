@@ -14,9 +14,10 @@
         android:layout_height="150dp"
         android:src="@drawable/gambar1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"/>
+        android:layout_marginTop="80dp" />
 
     <TextView
+        android:id="@+id/L_txt_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/L_img_1"
@@ -25,9 +26,7 @@
         android:textStyle="bold"
         android:textColor="@color/primaryColor"
         android:layout_centerHorizontal="true"
-        android:paddingTop="20dp"
-        android:id="@+id/L_txt_1"
-        />
+        android:paddingTop="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,7 +72,19 @@
             android:textColor="@color/white"
             android:textSize="15dp"
             android:background="@drawable/custom_button"
-            android:layout_marginHorizontal="80dp"/>
+            android:layout_marginHorizontal="80dp" />
+
+        <TextView
+            android:id="@+id/L_txt_forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Lupa Password?"
+            android:textColor="@color/secondaryColor"
+            android:textSize="14dp"
+            android:clickable="true"
+            android:focusable="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Belum punya akun? "
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/L_txt_3"

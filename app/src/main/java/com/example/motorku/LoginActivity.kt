@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var L_txt_username: EditText
     private lateinit var L_txt_password: EditText
     private lateinit var L_btn_2: Button
+    private lateinit var L_txt_forgotPassword: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
         L_txt_username = binding.LTxtUsername
         L_txt_password = binding.LTxtPassword
         L_btn_2 = binding.LBtn2
+        L_txt_forgotPassword = binding.LTxtForgotPassword
 
         L_btn_2.setOnClickListener {
             val email = L_txt_username.text.toString()
@@ -61,24 +63,12 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.LTxt3.setOnClickListener {
-            // Simpan data motor di SharedPreferences sebelum pindah ke RegisterActivity
-            val motorId = intent.getIntExtra("motor_id", -1)
-            if (motorId != -1) {
-                val motorDataPref = getSharedPreferences("MotorData", Context.MODE_PRIVATE)
-                motorDataPref.edit().apply {
-                    putInt("motor_id", motorId)  // Simpan motor_id hanya jika nilai valid
-                    putString("item_name", intent.getStringExtra("item_name"))
-                    putString("item_price", intent.getStringExtra("item_price"))
-                    putString("item_image", intent.getStringExtra("item_image"))
-                    apply()
-                }
-            } else {
-                // Tangani jika motor_id tidak ditemukan dalam Intent
-                Log.e("MotorData", "motor_id tidak ditemukan dalam Intent")
-            }
-
-            // Pindah ke halaman Register
             val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        L_txt_forgotPassword.setOnClickListener {
+            val intent = Intent(this, InputPhoneActivity::class.java)
             startActivity(intent)
         }
     }
@@ -99,50 +89,24 @@ class LoginActivity : AppCompatActivity() {
 
                     Toast.makeText(this@LoginActivity, "Login berhasil", Toast.LENGTH_SHORT).show()
 
-                    if (getIntent().getStringExtra("type") == "keranjang") {
-                        val apiInterface = RetrofitClient.getClient().create(ApiInterface::class.java)
-                        apiInterface.addToCart("Bearer $token",getIntent().getIntExtra("motor_id", -1)).enqueue(object : Callback<ApiResponse>{
-                            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
-                                Toast.makeText(applicationContext, "Motor berhasil ditambahkan ke keranjang", Toast.LENGTH_SHORT).show()
-                                val intent = Intent(this@LoginActivity, DeskripsiMotorActivity::class.java)
-                                intent.putExtra("motor_id", getIntent().getIntExtra("motor_id", -1))
-                                intent.putExtra("item_name", getIntent().getStringExtra("item_name"))
-                                intent.putExtra("item_price", getIntent().getStringExtra("item_price"))
-                                intent.putExtra("item_image", getIntent().getStringExtra("item_image"))
-                                intent.putExtra("item_specification", getIntent().getStringExtra("item_specification"))
-
-                                startActivity(intent)
-                                finish()
-                            }
-
-                            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
-                                Log.e("AddToCart", "Error: ${t.message}")
-                                Toast.makeText(applicationContext, "Motor gagal ditambahkan ke keranjang", Toast.LENGTH_SHORT).show()
-                            }
-                        })
-
-
-                    } else {
-
-                        val intent = Intent(this@LoginActivity, CheckoutActivity::class.java)
-
-                        // Ambil data motor dari Intent dan teruskan ke CheckoutActivity
-                        getIntent().getIntExtra("motor_id", -1).let { motorId ->
-                            if (motorId != -1) {
-                                intent.putExtra("motor_id", motorId)
-                            } else {
-                                // Tangani kasus jika motor_id tidak ditemukan
-                                Toast.makeText(this@LoginActivity, "Motor ID tidak ditemukan", Toast.LENGTH_SHORT).show()
-                            }
+                    val intent = if (getIntent().getStringExtra("type") == "keranjang") {
+                        Intent(this@LoginActivity, DeskripsiMotorActivity::class.java).apply {
+                            putExtra("motor_id", getIntent().getIntExtra("motor_id", -1))
+                            putExtra("item_name", getIntent().getStringExtra("item_name"))
+                            putExtra("item_price", getIntent().getStringExtra("item_price"))
+                            putExtra("item_image", getIntent().getStringExtra("item_image"))
+                            putExtra("item_specification", getIntent().getStringExtra("item_specification"))
                         }
-                        intent.putExtra("item_name", getIntent().getStringExtra("item_name"))
-                        intent.putExtra("item_price", getIntent().getStringExtra("item_price"))
-                        intent.putExtra("item_image", getIntent().getStringExtra("item_image"))
-
-                        startActivity(intent)
-                        finish()
+                    } else {
+                        Intent(this@LoginActivity, CheckoutActivity::class.java).apply {
+                            putExtra("motor_id", getIntent().getIntExtra("motor_id", -1))
+                            putExtra("item_name", getIntent().getStringExtra("item_name"))
+                            putExtra("item_price", getIntent().getStringExtra("item_price"))
+                            putExtra("item_image", getIntent().getStringExtra("item_image"))
+                        }
                     }
-
+                    startActivity(intent)
+                    finish()
                 } else {
                     Toast.makeText(this@LoginActivity, "Login gagal: ${response.message()}", Toast.LENGTH_SHORT).show()
                 }

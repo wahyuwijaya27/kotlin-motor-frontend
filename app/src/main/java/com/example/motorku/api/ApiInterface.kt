@@ -1,12 +1,14 @@
 package com.example.motorku.api
 
 import com.example.motorku.ApiResponse
-import com.example.motorku.CheckoutData
 import com.example.motorku.Item
 import com.example.motorku.ItemRiwayat
 import com.example.motorku.respon.CheckoutResponse
 import com.example.motorku.respon.LoginRespon
+import com.example.motorku.respon.PhoneRequest
+import com.example.motorku.respon.ResetRequest
 import com.example.motorku.respon.ResponseItem
+import com.example.motorku.respon.VerifyRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -29,6 +31,7 @@ interface ApiInterface {
     fun register(
         @Field("username") username: String,
         @Field("email") email: String,
+        @Field("phone") phone: String,
         @Field("password") password: String,
         @Field("password_confirmation") passwordConfirmation: String
     ): Call<ResponseBody>
@@ -98,5 +101,16 @@ interface ApiInterface {
         @Header("Authorization") token: String,
         @Path("id") id: Int
     ): Call<ApiResponse>
+
+
+    @POST("forgot-password/send-otp")
+    fun sendOtp(@Body request: PhoneRequest): Call<ResponseBody>
+
+    @POST("forgot-password/verify-otp")
+    fun verifyOtp(@Body request: VerifyRequest): Call<ResponseBody>
+
+    @POST("forgot-password/reset-password")
+    fun resetPassword(@Body request: ResetRequest): Call<ResponseBody>
+
 
 }

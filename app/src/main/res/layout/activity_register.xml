@@ -59,9 +59,22 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:textSize="15dp"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:hint="Email"
             android:layout_marginTop="20dp"/>
+        
+        <EditText
+            android:id="@+id/R_txt_phone"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_nama"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="15dp"
+            android:inputType="phone"
+            android:hint="No Telp"
+            android:layout_marginTop="20dp" />
 
         <EditText
             android:id="@+id/R_txt_password"

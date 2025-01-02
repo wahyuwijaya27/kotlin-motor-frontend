@@ -19,6 +19,15 @@
         android:theme="@style/Theme.Motorku"
         tools:targetApi="31">
         <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InputOtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InputPhoneActivity"
+            android:exported="false" />
+        <activity
             android:name=".CartActivity"
             android:exported="false" />
         <activity
