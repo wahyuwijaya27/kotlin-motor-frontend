@@ -2,6 +2,7 @@ package com.example.motorku
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,8 @@ class MyAdapter(private val context: Context, private val itemList: List<Item>) 
             .placeholder(R.drawable.ic_loading) // Placeholder saat memuat
             .error(R.drawable.ic_error) // Gambar error jika gagal memuat
             .into(holder.imageView) // ImageView yang akan menampilkan gambar
+
+        Log.d("MyAdapter", "Loading image from URL: ${item.image}")
 
         // Menampilkan nama motor
         holder.textViewTitle.text = item.name

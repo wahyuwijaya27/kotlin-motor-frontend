@@ -1,6 +1,5 @@
 package com.example.motorku
 
-
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -20,7 +19,6 @@ import okhttp3.RequestBody.Companion.create
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 class CheckoutActivity : AppCompatActivity() {
     private lateinit var btnCheckout: Button
@@ -74,34 +72,43 @@ class CheckoutActivity : AppCompatActivity() {
         btnCheckout.setOnClickListener {
             val namaLengkap = createPartFromString(namaLengkapEditText.text.toString())
             val alamatLengkap = createPartFromString(alamatLengkapEditText.text.toString())
-            val nomorTelepon = createPartFromString(nomorTeleponEditText.text.toString())
-            val motorIdRequestBody = createPartFromString(motorIdEditText.text.toString())
+            val nomorTelepon = nomorTeleponEditText.text.toString()
 
-            val sharedPreferences = applicationContext.getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
-            val token = "Bearer ${sharedPreferences.getString("ACCESS_TOKEN", "")}"
+            // Validasi nomor telepon
+            if (nomorTelepon.isEmpty()) {
+                nomorTeleponEditText.error = "Nomor telepon tidak boleh kosong"
+            } else if (!nomorTelepon.matches(Regex("\\d+"))) {
+                nomorTeleponEditText.error = "Nomor telepon hanya boleh berisi angka"
+            } else {
+                val nomorTeleponRequestBody = createPartFromString(nomorTelepon)
+                val motorIdRequestBody = createPartFromString(motorIdEditText.text.toString())
 
-            val apiInterface = RetrofitClient.getClient().create(ApiInterface::class.java)
-            apiInterface.checkout(token, namaLengkap, alamatLengkap, nomorTelepon, motorIdRequestBody)
-                .enqueue(object : Callback<CheckoutResponse> {
-                    override fun onResponse(call: Call<CheckoutResponse>, response: Response<CheckoutResponse>) {
-                        if (response.isSuccessful) {
-                            Toast.makeText(this@CheckoutActivity, "Checkout berhasil", Toast.LENGTH_SHORT).show()
+                val sharedPreferences = applicationContext.getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
+                val token = "Bearer ${sharedPreferences.getString("ACCESS_TOKEN", "")}"
 
-                            // Berpindah ke halaman BuktiPembelianActivity
-                            val intent = Intent(this@CheckoutActivity, BuktiPembelianActivity::class.java)
-                            intent.putExtra("motor_name", motorName)
-                            intent.putExtra("motor_price", motorPrice)
-                            intent.putExtra("checkout_id", response.body()?.id)
-                            startActivity(intent)
-                        } else {
-                            Toast.makeText(this@CheckoutActivity, "Checkout gagal", Toast.LENGTH_SHORT).show()
+                val apiInterface = RetrofitClient.getClient().create(ApiInterface::class.java)
+                apiInterface.checkout(token, namaLengkap, alamatLengkap, nomorTeleponRequestBody, motorIdRequestBody)
+                    .enqueue(object : Callback<CheckoutResponse> {
+                        override fun onResponse(call: Call<CheckoutResponse>, response: Response<CheckoutResponse>) {
+                            if (response.isSuccessful) {
+                                Toast.makeText(this@CheckoutActivity, "Checkout berhasil", Toast.LENGTH_SHORT).show()
+
+                                // Berpindah ke halaman BuktiPembelianActivity
+                                val intent = Intent(this@CheckoutActivity, BuktiPembelianActivity::class.java)
+                                intent.putExtra("motor_name", motorName)
+                                intent.putExtra("motor_price", motorPrice)
+                                intent.putExtra("checkout_id", response.body()?.id)
+                                startActivity(intent)
+                            } else {
+                                Toast.makeText(this@CheckoutActivity, "Checkout gagal", Toast.LENGTH_SHORT).show()
+                            }
                         }
-                    }
 
-                    override fun onFailure(call: Call<CheckoutResponse>, t: Throwable) {
-                        Toast.makeText(this@CheckoutActivity, "Koneksi gagal", Toast.LENGTH_SHORT).show()
-                    }
-                })
+                        override fun onFailure(call: Call<CheckoutResponse>, t: Throwable) {
+                            Toast.makeText(this@CheckoutActivity, "Koneksi gagal", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+            }
         }
 
         // Tombol Batal

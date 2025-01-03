@@ -52,15 +52,9 @@ class EditProfilActivity : AppCompatActivity() {
         }
 
         imageView = findViewById(R.id.Ep_foto_profil)
-        btnEditFoto = findViewById(R.id.Ep_btn_editFoto)
         Ep_et_username = findViewById(R.id.Ep_et_username)
         Ep_et_password = findViewById(R.id.Ep_et_password)
         Ep_btn_simpan = findViewById(R.id.Ep_btn_simpan)
-
-        btnEditFoto.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, PICK_IMAGE_REQUEST)
-        }
 
         Ep_btn_simpan.setOnClickListener {
             val username = Ep_et_username.text.toString()
@@ -92,65 +86,5 @@ class EditProfilActivity : AppCompatActivity() {
                 }
             })
         }
-
-        // Meminta izin jika diperlukan
-        checkAndRequestPermissions()
-    }
-
-    private fun checkAndRequestPermissions() {
-        val permissions = listOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-
-        val permissionsToRequest = permissions.filter {
-            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
-        }
-
-        if (permissionsToRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissionsToRequest.toTypedArray(), 0)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
-            val selectedImage: Uri? = data?.data
-            if (selectedImage != null) {
-                val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
-                val circularBitmap = getCircularBitmap(bitmap)
-                imageView.setImageBitmap(circularBitmap)
-            }
-        }
-    }
-
-    private fun getCircularBitmap(bitmap: Bitmap): Bitmap {
-        val width = bitmap.width
-        val height = bitmap.height
-        val diameter = Math.min(width, height)
-
-        val output = Bitmap.createBitmap(diameter, diameter, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(output)
-
-        val paint = Paint()
-        paint.isAntiAlias = true
-
-        val path = Path()
-        path.addCircle(
-            (diameter / 2).toFloat(),
-            (diameter / 2).toFloat(),
-            (diameter / 2).toFloat(),
-            Path.Direction.CCW
-        )
-
-        canvas.clipPath(path)
-        canvas.drawBitmap(
-            bitmap,
-            ((diameter - width) / 2).toFloat(),
-            ((diameter - height) / 2).toFloat(),
-            paint
-        )
-
-        return output
     }
 }

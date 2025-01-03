@@ -74,7 +74,8 @@
         android:layout_below="@id/C_txt_4"
         android:layout_marginTop="8dp"
         android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"/>
+        android:layout_marginEnd="40dp"
+        android:enabled="false"/>
 
     <EditText
         android:id="@+id/C_txt_username"
@@ -104,36 +105,8 @@
         android:layout_below="@id/C_txt_alamat"
         android:layout_marginTop="8dp"
         android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp" />
-
-<!--    &lt;!&ndash; Upload Transaction Proof &ndash;&gt;-->
-
-<!--    <LinearLayout-->
-<!--        android:id="@+id/C_layout_uploadBukti"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_below="@id/C_txt_nomorTelp"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:gravity="center_horizontal">-->
-
-<!--        &lt;!&ndash; Upload Button &ndash;&gt;-->
-<!--        <Button-->
-<!--            android:id="@+id/C_btn_uploadBukti"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Upload Bukti Transaksi"-->
-<!--            android:layout_gravity="center_vertical"/>-->
-
-<!--        &lt;!&ndash; Transaction Proof Image &ndash;&gt;-->
-<!--        <ImageView-->
-<!--            android:id="@+id/C_img_buktiTransaksi"-->
-<!--            android:layout_width="100dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_gravity="center_vertical"/>-->
-<!--&lt;!&ndash;            android:src="@drawable/ic_upload_placeholder" />&ndash;&gt;-->
-<!--    </LinearLayout>-->
+        android:layout_marginEnd="40dp"
+        android:inputType="number" />
 
     <!-- Checkout Button -->
     <TextView
